@@ -20,7 +20,6 @@ public class MainController {
     public Model main_page(Model model) {
         model.addAttribute("message", "помогите мне");
         model.addAttribute("title_page", "Основная страница");
-        System.out.print("MAIN Get");
         return model;
     }
 

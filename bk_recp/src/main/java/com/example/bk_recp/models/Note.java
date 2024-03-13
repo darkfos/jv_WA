@@ -9,6 +9,7 @@ import javax.persistence.*;
 public class Note {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id_notes")
     private Long id_notes;
 

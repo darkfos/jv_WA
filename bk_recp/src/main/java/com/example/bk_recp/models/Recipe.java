@@ -10,6 +10,7 @@ import javax.persistence.*;
 public class Recipe {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id_recipe")
     private Long id_recipe;
 

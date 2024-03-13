@@ -8,6 +8,7 @@ import javax.persistence.*;
 public class Review {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id_review")
     private Long id_review;
 

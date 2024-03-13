@@ -1,9 +1,6 @@
 package com.example.bk_recp.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="UserType")
@@ -16,6 +13,7 @@ public class UserType {
     */
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id_user_type")
     private Long id_user_type;
 
