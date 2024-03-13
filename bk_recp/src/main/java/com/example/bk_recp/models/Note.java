@@ -3,9 +3,10 @@ package com.example.bk_recp.models;
 import org.hibernate.type.DateType;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
-@Table(name="Notes")
+@Table(name="notes")
 public class Note {
 
     @Id
@@ -20,9 +21,9 @@ public class Note {
     private String description;
 
     @Column(name="date_cr")
-    private DateType date_reg;
+    private Date date_reg;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name="id_user")
     private User user;
 
@@ -30,7 +31,7 @@ public class Note {
     public Note() {
     }
 
-    public Note(String title_notes, String description, DateType date_reg, User user) {
+    public Note(String title_notes, String description, Date date_reg, User user) {
         this.title_notes = title_notes;
         this.description = description;
         this.date_reg = date_reg;
@@ -74,11 +75,11 @@ public class Note {
         return this.description;
     }
 
-    public void setDate_reg(DateType date_reg) {
+    public void setDate_reg(Date date_reg) {
         this.date_reg = date_reg;
     }
 
-    public DateType getDate_reg() {
+    public Date getDate_reg() {
         return this.date_reg;
     }
 

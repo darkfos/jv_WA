@@ -9,7 +9,14 @@
     <header th:insert="bases/header :: header_block"></header>
     <div class="container mt-45">
         <h1>Мои заметки</h1>
+        <br>
+        <div th:each="note: ${notes}}" class="alert alert-info mt-2">
+            <h3 th:text="${note.title_notes}" />
+            <p th:text="${note.description}"/>
+            <p th:text="${note.date_reg}" />
+            <a th:href="'/note/' + ${note.id_notes}">Подробнее</a>
+        </div>
     </div>
-
+    <footer th:insert="bases/footer :: booter_block"></footer>
 </body>
 </html>

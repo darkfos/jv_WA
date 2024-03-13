@@ -3,7 +3,7 @@ package com.example.bk_recp.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name="UserType")
+@Table(name="usertype")
 public class UserType {
     /*
         Entity - Сущность отображение в базе данных
