@@ -55,7 +55,7 @@ public class Recipe {
     }
 
     public Recipe(String title, String description, String sostav, DateType date_reg,
-             int view_us, User user) {
+                  int view_us, User user) {
 
         this.title = title;
         this.description = description;
@@ -147,4 +147,3 @@ public class Recipe {
         return this.user;
     }
 }
-

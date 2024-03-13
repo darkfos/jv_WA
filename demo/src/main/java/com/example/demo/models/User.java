@@ -14,6 +14,11 @@ public class User {
     @Column(name="id_user")
     private Long id_user;
 
+
+    @Id
+    @Column(name="name_user")
+    private String name_user;
+
     @Column(name="login")
     private String login;
 
@@ -41,6 +46,7 @@ public class User {
         this.date_reg = date_reg;
         this.phone = phone;
         this.userType = userType;
+        this.name_user = "Бобёр";
     }
 
 
@@ -52,7 +58,8 @@ public class User {
                 ", email=" + this.email +
                 ", date_reg=" + this.date_reg +
                 ", phone=" + this.phone +
-                ", id_user_type" + this.userType +
+                ", id_user_type=" + this.userType +
+                ", username=" + this.name_user +
                 "}";
     }
 
