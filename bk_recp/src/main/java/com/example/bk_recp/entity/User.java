@@ -34,6 +34,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Recipes> recipes;
 
+    @OneToMany(mappedBy = "user")
+    private List<Review> review;
+
     public User() {
 
     }
