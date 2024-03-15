@@ -5,13 +5,15 @@ import com.example.bk_recp.repositories.RecipesRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class RecipesController {
+public class RecipesService {
 
     private final RecipesRepository recipesRepository;
 
@@ -53,8 +55,20 @@ public class RecipesController {
      * Добавляем запись recipe по id
      * @param new_recipe
      */
-    public void addRecipe(Recipes new_recipe) {
+    public void addRecipe(Recipes new_recipe, MultipartFile mainImage) {
 
+        //Проверяем загрузили ли фото
+        if (mainImage.getSize() != 0) {
+            try {
+                new_recipe.setPhoto_recipe(
+                        mainImage.getBytes()
+                );
+            } catch (IOException e) {
+                log.error("Dont to add recipe, error");
+            }
+        } else {
+            log.info("Dont to add recipe, nope photo");
+        }
         recipesRepository.save(new_recipe);
         log.info("Request to add new recipe");
     }
