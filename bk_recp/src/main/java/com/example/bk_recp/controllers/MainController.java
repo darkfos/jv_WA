@@ -1,26 +1,23 @@
 package com.example.bk_recp.controllers;
 
+import com.example.bk_recp.services.NoteService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
+@RequiredArgsConstructor
 public class MainController {
+    //Приём HTTP request
 
-    @GetMapping(value = "/main_page", params = {"name", "name"})
-    public Model main_page(@RequestParam("name") String name, Model model) {
-        model.addAttribute("message", "помогите мне");
-        model.addAttribute("title_page", "Основная страница");
-        model.addAttribute("name_user", name);
-        return model;
-    }
+    private final NoteService noteService;
 
-    @GetMapping("/main_page")
-    public Model main_page(Model model) {
-        model.addAttribute("message", "помогите мне");
-        model.addAttribute("title_page", "Основная страница");
-        return model;
+    @GetMapping("/")
+    public String notes(Model model) {
+        model.addAttribute("title_page", "Заметки");
+        model.addAttribute("all_notes", noteService.getNotes());
+        return "notes";
     }
 
 }
