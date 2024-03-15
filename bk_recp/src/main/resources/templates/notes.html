@@ -12,8 +12,7 @@
     <body>
         <header th:insert="~{bases/header :: header_block}"></header>
         <div class="container mt-45">
-            <h1>Мои заметки</h1>
-            <br>
+            <h2 class="z_header">Мои заметки</h2>
             <div class="unique_note" th:each="note : ${all_notes}">
                 <div class="left_info_note">
                     <h2 th:text="${note.title_note}"/>
@@ -26,9 +25,11 @@
                     <button class="bt_info">Просмотр</button>
                 </div>
             </div>
-            <button style="margin: auto">
-                <a href="#">Добавить</a>
-            </button>
+            <div class="button_add">
+                <button class="bt_add">
+                    <a href="/create_note">Добавить</a>
+                </button>
+            </div>
         </div>
         <footer th:insert="~{bases/footer :: footer_block}"></footer>
     </body>

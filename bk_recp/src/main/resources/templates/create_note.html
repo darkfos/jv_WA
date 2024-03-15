@@ -1,10 +1,29 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html lang="en">
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="title_page"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/styles/for_footer.css}">
+    <link rel="stylesheet" th:href="@{/styles/for_header.css}">
+    <link rel="stylesheet" th:href="@{/styles/create_note_main.css}">
 </head>
 <body>
-
+    <header th:insert="~{bases/header :: header_block}"></header>
+    <div class="create_note">
+        <img th:src="@{/images/image 7.png}" width="329" height="280">
+        <h1>Создаем заметку</h1>
+        <form action="/note/create" method="post" class="information">
+            <label for="text_title">Заголовок</label>
+            <input type="text" placeholder="Ваш заголовок" id="text_title" name="title">
+            <label for="textarea">Описание</label>
+            <textarea id="textarea" placeholder="Ваше описание" name="description"></textarea>
+        </form>
+        <div class="create_button">
+            <button>Отправить</button>
+        </div>
+    </div>
+    <footer th:insert="~{bases/footer :: footer_block}"></footer>
 </body>
 </html>

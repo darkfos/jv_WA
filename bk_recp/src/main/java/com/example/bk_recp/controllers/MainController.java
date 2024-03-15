@@ -14,10 +14,8 @@ public class MainController {
     private final NoteService noteService;
 
     @GetMapping("/")
-    public String notes(Model model) {
-        model.addAttribute("title_page", "Заметки");
-        model.addAttribute("all_notes", noteService.getNotes());
-        return "notes";
+    public String main_page(Model model) {
+        return "main_page";
     }
 
 }
