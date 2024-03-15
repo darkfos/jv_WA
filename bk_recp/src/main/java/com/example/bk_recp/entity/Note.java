@@ -29,6 +29,9 @@ public class Note {
     @Column(name="view")
     private int view;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private User user;
+
     public Note() {
 
     }

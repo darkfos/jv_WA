@@ -39,6 +39,9 @@ public class Recipes {
     @Column(name="date_upd")
     private Date date_upd;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private User user;
+
     public Recipes() {
 
     }
