@@ -8,7 +8,7 @@
     <link th:href="@{/styles/main.css}" rel="stylesheet">
 </head>
 <body>
-    <header th:insert="bases/header :: header_block"></header>
+    <header th:insert="~{bases/header :: header_block}"></header>
     <div class="main_body">
         <div class="main_body_dl1">
             <div class="main_body_dl1_left">
@@ -83,6 +83,6 @@
             </div>
         </div>
     </div>
-    <footer th:insert="bases/footer :: footer_block"></footer>
+    <footer th:insert="~{bases/footer :: footer_block}"></footer>
 </body>
 </html>

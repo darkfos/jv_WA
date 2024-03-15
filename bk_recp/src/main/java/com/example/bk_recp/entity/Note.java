@@ -4,7 +4,7 @@ package com.example.bk_recp.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
