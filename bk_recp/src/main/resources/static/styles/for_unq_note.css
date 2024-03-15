@@ -1,0 +1,30 @@
+.note_page {
+    width: 40%;
+    margin: auto;
+    margin-top: 10%;
+}
+
+
+.note_page > h2 {
+    text-align: center;
+}
+
+.note_info {
+    margin: auto;
+    text-align: left;
+}
+
+.note_buttons {
+    display: flex;
+    gap: 10%;
+    justify-content: center;
+}
+
+.note_buttons > form {
+    width: 15%;
+    height: 40px;
+}
+
+.note_buttons > form > input {
+    height: 100%;
+}

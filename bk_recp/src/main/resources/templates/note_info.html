@@ -1,10 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/styles/for_footer.css}">
+    <link rel="stylesheet" th:href="@{/styles/for_header.css}">
+    <link rel="stylesheet" th:href="@{/styles/for_note.css}">
+    <link rel="stylesheet" th:href="@{/styles/for_unq_note.css}">
+    <title>Заметка</title>
 </head>
 <body>
-
+    <header th:insert="~{bases/header :: header_block}"></header>
+    <div class="note_page">
+        <h2>Моя заметка</h2>
+        <div class="note_info">
+            <h3 th:text="${note.title_note}"/>
+            <p class="description" th:text="${note.description}"/>
+            <p th:text="${note.date_cr}"/>
+            <p>Просмотры: 234</p>
+        </div>
+        <div class="note_buttons">
+            <form action="/delete_note" method="post">
+                <input type="hidden" name="id_note" th:value="${note.id_notes}">
+                <input type="submit" value="Удалить" class="bt_del">
+            </form>
+            <form action="/update_note" method="post">
+                <input type="hidden" name="id_note" th:value="${note.id_notes}">
+                <input type="submit" value="Обновить" class="bt_upd">
+            </form>
+        </div>
+    </div>
+    <header th:insert="~{bases/footer :: footer_block}"></header>
 </body>
 </html>

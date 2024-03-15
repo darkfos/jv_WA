@@ -35,4 +35,15 @@ public class NoteService {
         notes.removeIf(
                 note -> note.getId_notes().equals(id_note));
     }
+
+    public Note getNoteById(Long id_note) {
+        //Получаем Note по Id
+
+        for (Note note : notes) {
+            if (note.getId_notes().equals(id_note)) {
+                return note;
+            }
+        }
+        return null;
+    }
 }

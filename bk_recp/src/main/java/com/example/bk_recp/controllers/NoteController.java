@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Date;
+import java.sql.Date;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 @RequiredArgsConstructor
@@ -32,16 +35,22 @@ public class NoteController {
         return "create_note";
     }
 
-    @PostMapping("/note/{id_note}")
-    public String get_note(@PathVariable Long id_note, Model model) {
+    @GetMapping("/note_by_id")
+    public String get_note(@RequestParam("id_note") Long id_note, Model model) {
+        Note unique_note = noteService.getNoteById(id_note);
+        model.addAttribute("note", unique_note);
+        System.out.println(id_note);
         return "note_info";
     }
 
     @PostMapping("/create_note/create")
-    public String create_new_note(Note new_note) {
+    public String create_new_note(Note new_note) throws ParseException {
         new_note.setId_notes(7L);
-        Date date_now = new Date();
-        new_note.setDate_cr(date_now);
+
+        LocalDate localdate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        Date lc_date = Date.valueOf(localdate.format(formatter));
+        new_note.setDate_cr(lc_date);
         noteService.add_note(new_note);
         return "redirect:/";
     }

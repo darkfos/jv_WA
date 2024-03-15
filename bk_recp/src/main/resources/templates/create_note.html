@@ -14,9 +14,9 @@
     <div class="create_note">
         <img th:src="@{/images/image 7.png}" width="329" height="280">
         <h1>Создаем заметку</h1>
-        <form action="/note/create" method="post" class="information">
+        <form action="/create_note/create" method="post" class="information">
             <label for="text_title">Заголовок</label>
-            <input type="text" placeholder="Ваш заголовок" id="text_title" name="title">
+            <input type="text" placeholder="Ваш заголовок" id="text_title" name="title_note">
             <label for="textarea">Описание</label>
             <textarea id="textarea" placeholder="Ваше описание" name="description"></textarea>
             <div class="create_button">
