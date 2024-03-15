@@ -14,6 +14,8 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -45,7 +47,6 @@ public class NoteController {
 
     @PostMapping("/create_note/create")
     public String create_new_note(Note new_note) throws ParseException {
-        new_note.setId_notes(7L);
 
         LocalDate localdate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

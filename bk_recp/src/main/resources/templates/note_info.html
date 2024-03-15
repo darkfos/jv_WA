@@ -16,8 +16,8 @@
         <div class="note_info">
             <h3 th:text="${note.title_note}"/>
             <p class="description" th:text="${note.description}"/>
-            <p th:text="${note.date_cr}"/>
-            <p>Просмотры: 234</p>
+            <p>Дата создания: <span th:text="${note.date_cr}"/></p>
+            <p>Просмотры: <span th:text="${note.view}"/></p>
         </div>
         <div class="note_buttons">
             <form action="/delete_note" method="post">
