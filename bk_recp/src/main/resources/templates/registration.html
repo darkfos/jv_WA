@@ -32,18 +32,20 @@
     </header>
     <div class="create_note">
         <img src="../../../../../tst/create_note/image%205.png" width="329" height="280">
-        <h1>Ваш отзыв</h1>
+        <h1>Регистрация</h1>
         <div class="information">
-            <label for="text_title">Имя</label>
+            <label for="text_title">Логин</label>
             <input type="text" placeholder="Ваш заголовок" id="text_title">
-            <label for="email">Как нам с вами связаться</label>
-            <input type="email" id="email" placeholder="Ваше описание"></textarea> 
-            <label for="description">Ваш комментарий</label>
-            <textarea id="description"></textarea>
+            <label for="password">Пароль</label>
+            <input id="password" placeholder="Ваше описание"></textarea>
+            <label for="email_text">Почта</label>
+            <input type="email" id="email_text">
+            <label for="telephone_number">Номер телефона</label>
+            <input type="tel" id="telephone_number">
         </div>
         <div class="create_button">
-            <form action="/add_review" method="post" class="form_add_review">
-                <input type="submit" value="Отправить" >
+            <form action="/authorization_join" method="post" class="form_add_review">
+                <input type="submit" value="Отправить">
             </form>
         </div>
     </div>

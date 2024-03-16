@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="title_page"/>
+    <link rel="stylesheet" th:href="@{/styles/for_footer.css}">
+    <link rel="stylesheet" th:href="@{/styles/for_header.css}">
+    <link rel="stylesheet" th:href="@{/styles/create_note_main.css}">
+</head>
+<body>
+    <header th:insert="bases/header :: header_block"></header>
+        <div class="create_note">
+            <img src="../../../../../tst/create_note/image%206.png" width="329" height="280">
+            <h1>Создаем рецепт</h1>
+            <div class="information">
+                <label for="text_title">Заголовок</label>
+                <input type="text" placeholder="Ваш заголовок" id="text_title">
+                <label for="textarea">Описание</label>
+                <textarea id="textarea" placeholder="Ваше описание"></textarea>
+                <label for="textarea">Описание готовки</label>
+                <textarea id="textarea" placeholder="Ваше описание готовки"></textarea>
+                <label>Состав</label>
+                <div class="rd_buttons">
+                    <input type="radio" title="r_sel" id="rad_r" name="select">
+                    <label for="rad_r">Ручной</label>
+                    <input type="radio" title="l_sel" id="rad_l" name="select">
+                    <label for="rad_l">Список</label>
+                </div>
+                <textarea placeholder="Ваш состав"></textarea>
+                <div class="block_photo">
+                    <label for="photo">Фото</label>
+                    <input type="file" id="photo">
+                </div>
+            </div>
+            <div class="create_button">
+                <button>Отправить</button>
+            </div>
+        </div>
+    <footer th:insert="bases/footer :: footer_block"></footer>
+</body>
+</html>
