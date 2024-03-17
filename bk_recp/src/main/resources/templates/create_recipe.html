@@ -12,15 +12,15 @@
 <body>
     <header th:insert="bases/header :: header_block"></header>
         <div class="create_note">
-            <img src="../../../../../tst/create_note/image%206.png" width="329" height="280">
+            <img th:src="@{/images/image 6.png}" width="329" height="280">
             <h1>Создаем рецепт</h1>
-            <div class="information">
-                <label for="text_title">Заголовок</label>
-                <input type="text" placeholder="Ваш заголовок" id="text_title">
-                <label for="textarea">Описание</label>
-                <textarea id="textarea" placeholder="Ваше описание"></textarea>
-                <label for="textarea">Описание готовки</label>
-                <textarea id="textarea" placeholder="Ваше описание готовки"></textarea>
+            <form action="/create_new_recipe" method="post" class="information" enctype="multipart/form-data">
+                <label for="title_recipe">Заголовок</label>
+                <input type="text" placeholder="Ваш заголовок" id="title_recipe" name="title_recipe">
+                <label for="description">Описание</label>
+                <textarea id="description" name="description" placeholder="Ваше описание"></textarea>
+                <label for="compound">Описание готовки</label>
+                <textarea id="compound" name="compound" placeholder="Ваше описание готовки"></textarea>
                 <label>Состав</label>
                 <div class="rd_buttons">
                     <input type="radio" title="r_sel" id="rad_r" name="select">
@@ -31,12 +31,10 @@
                 <textarea placeholder="Ваш состав"></textarea>
                 <div class="block_photo">
                     <label for="photo">Фото</label>
-                    <input type="file" id="photo">
+                    <input type="file" id="photo" name="main_file">
                 </div>
-            </div>
-            <div class="create_button">
-                <button>Отправить</button>
-            </div>
+                <input type="submit" value="Отправить" class="to_submit">
+            </form>
         </div>
     <footer th:insert="bases/footer :: footer_block"></footer>
 </body>

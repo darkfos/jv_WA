@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/styles/for_footer.css}">
+    <link rel="stylesheet" th:href="@{/styles/for_header.css}">
+    <link rel="stylesheet" th:href="@{/styles/for_note.css}">
+    <link rel="stylesheet" th:href="@{/styles/for_unq_note.css}">
+    <title>Рецепт</title>
+</head>
+<body>
+<header th:insert="~{bases/header :: header_block}"></header>
+<div class="note_page">
+    <h2>Мой рецепт</h2>
+    <br><br>
+    <div class="img_info">
+        <img th:src="'data:image/jpeg;base64,' + ${recipe.photo}">
+    </div>
+    <div class="note_info">
+        <h2><i th:text="${recipe.title_recipe}"/></h2>
+        <br>
+        <h3>Описание</h3>
+        <br>
+        <p class="description" th:text="${recipe.description}"/>
+        <br>
+        <h3>Состав</h3>
+        <br>
+        <p th:text="${recipe.compound}" />
+        <br>
+        <h3>Дополнительная информация</h3>
+        <br>
+        <p>Дата создания: <span th:text="${recipe.date_reg}"/></p>
+        <br>
+        <p>Дата обновления: <span th:text="${recipe.date_upd}"/></p>
+        <br>
+        <p>Просмотры: <span th:text="${recipe.view_us}"/></p>
+    </div>
+    <div class="note_buttons">
+        <form action="/delete_note" method="post">
+            <input type="hidden" name="id_recipe" th:value="${recipe.id_recipe}">
+            <input type="submit" value="Удалить" class="bt_del">
+        </form>
+        <form action="/update_note" method="post">
+            <input type="hidden" name="id_recipe" th:value="${recipe.id_recipe}">
+            <input type="submit" value="Обновить" class="bt_upd">
+        </form>
+    </div>
+</div>
+<header th:insert="~{bases/footer :: footer_block}"></header>
+</body>
+</html>

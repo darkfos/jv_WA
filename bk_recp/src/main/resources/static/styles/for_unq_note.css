@@ -11,7 +11,19 @@
 
 .note_info {
     margin: auto;
-    text-align: left;
+}
+
+.img_info {
+    width: 100%;
+    margin: auto;
+    text-align:center;
+}
+
+.img_info > img {
+    width: 80%;
+    height: 70%;
+    border: 1px solid white;
+    border-radius: 40px;
 }
 
 .note_buttons {

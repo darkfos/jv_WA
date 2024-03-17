@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -25,6 +26,13 @@ public class RecipesService {
 
         List<Recipes> recipes = recipesRepository.findAll();
         log.info("Request get all recipes");
+
+        //Code Image
+        for (Recipes recipe: recipes) {
+            String img = Base64.getEncoder().encodeToString(recipe.getPhoto_recipe());
+            recipe.setPhoto(img);
+        }
+
         return recipes;
     }
 
@@ -36,6 +44,13 @@ public class RecipesService {
     public Recipes getRecipeById(Long id_recipe) {
 
         Recipes recipe = recipesRepository.findById(id_recipe).orElse(null);
+
+        //View
+        recipe.setView_us(
+                recipe.getView_us() + 1
+        );
+
+        recipesRepository.save(recipe);
         log.info("Request to get recipe by id");
         return recipe;
     }

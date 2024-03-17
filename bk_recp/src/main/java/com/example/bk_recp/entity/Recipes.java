@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.awt.*;
 import java.sql.Date;
 
 @Entity
@@ -41,6 +42,8 @@ public class Recipes {
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private User user;
+
+    private String photo;
 
     public Recipes() {
 

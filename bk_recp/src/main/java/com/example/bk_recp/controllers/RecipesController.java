@@ -10,6 +10,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Base64;
 import java.util.List;
 
 
@@ -38,11 +47,17 @@ public class RecipesController {
      * @param model
      * @return
      */
-    @GetMapping("/recipe")
-    public String get_recipe_by_id(@RequestParam("recipe_id") Long recipe_id, Model model) {
+    @GetMapping("/recipe_unique")
+    public String get_recipe_by_id(@RequestParam("recipe_id") Long recipe_id, Model model) throws IOException {
         Recipes recipe = recipesService.getRecipeById(recipe_id);
+
+        //Photo coder
+        recipe.setPhoto(
+                Base64.getEncoder().encodeToString(recipe.getPhoto_recipe())
+        );
+
         model.addAttribute("recipe", recipe);
-        return "recipe";
+        return "recipe_info";
     }
 
     /**
@@ -53,7 +68,7 @@ public class RecipesController {
     @GetMapping("/create_recipe")
     public String create_recipe(Model model) {
         model.addAttribute("title_page", "Создание рецепта");
-        return "create_recipes";
+        return "create_recipe";
     }
 
 
@@ -64,7 +79,17 @@ public class RecipesController {
      * @return
      */
     @PostMapping("/create_new_recipe")
-    public String create_new_recipe(@RequestParam("main_file") MultipartFile main_file, Recipes new_recipe) {
+    public String create_new_recipe(@RequestParam("main_file") MultipartFile main_file, Recipes new_recipe) throws IOException {
+
+        //Date
+        LocalDate localdate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        Date lc_date = Date.valueOf(localdate.format(formatter));
+
+        //Create date
+        new_recipe.setDate_reg(lc_date);
+        new_recipe.setDate_upd(lc_date);
+
         recipesService.addRecipe(new_recipe, main_file);
         return "redirect:/";
     }

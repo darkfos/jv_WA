@@ -70,3 +70,33 @@
 .z_header {
     margin-top: 12%;
 }
+
+
+
+
+.unique_recipe {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    width: auto;
+    border: 2px solid black;
+    border-radius: 40px;
+    align-items: center;
+    margin-top: 5%;
+}
+
+.left_info_recipe {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    justify-content: left;
+}
+
+
+.right_info_recipe {
+    display: flex;
+    gap: 10%;
+    margin-top: 10%;
+    width: 50%;
+}
