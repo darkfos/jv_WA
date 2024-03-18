@@ -6,7 +6,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +26,21 @@ public class ReviewServices {
 
         List<Review> all_review = reviewRepository.findAll();
         log.info("Get all reviews");
-        return all_review;
+
+        if (all_review.size() < 3) {
+            return all_review;
+        }
+
+        //Get 3 random review
+        Random rnd_numbers = new Random();
+        List<Review> reviews = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            reviews.add(
+                    all_review.get(rnd_numbers.nextInt(all_review.size()))
+            );
+        }
+
+        return reviews;
     }
 
     /**
@@ -54,5 +70,13 @@ public class ReviewServices {
     public void delete_review(Long id_review) {
         reviewRepository.deleteById(id_review);
         log.info("Delete review");
+    }
+
+    /**
+     * Добавление review
+     * @param review
+     */
+    public void add_review(Review review) {
+        reviewRepository.save(review);
     }
 }

@@ -20,6 +20,9 @@ public class Review {
     @Column(name="message_user")
     private String message_user;
 
+    @Column(name="email")
+    private String email;
+
     @ManyToOne()
     private User user;
 
