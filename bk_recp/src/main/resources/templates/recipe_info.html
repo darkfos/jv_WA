@@ -37,12 +37,12 @@
         <p>Просмотры: <span th:text="${recipe.view_us}"/></p>
     </div>
     <div class="note_buttons">
-        <form action="/delete_note" method="post">
+        <form action="/delete_recipe" method="post">
             <input type="hidden" name="id_recipe" th:value="${recipe.id_recipe}">
             <input type="hidden" name="_csrf" th:value="${_csrf.token}">
             <input type="submit" value="Удалить" class="bt_del">
         </form>
-        <form action="/update_note" method="post">
+        <form action="/update_recipe" method="post">
             <input type="hidden" name="id_recipe" th:value="${recipe.id_recipe}">
             <input type="hidden" name="_csrf" th:value="${_csrf.token}">
             <input type="submit" value="Обновить" class="bt_upd">

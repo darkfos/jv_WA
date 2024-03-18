@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -17,23 +19,34 @@ import java.util.List;
 public class RecipesService {
 
     private final RecipesRepository recipesRepository;
+    private final NoteService noteService;
 
     /**
      * Возвращаем все записи рецептов
      * @return
      */
-    public List<Recipes> get_recipes() {
+    public List<Recipes> get_recipes(Principal principal) {
 
         List<Recipes> recipes = recipesRepository.findAll();
         log.info("Request get all recipes");
 
+        //Get recipe for user
+        ArrayList<Recipes> result = new ArrayList<>();
+
+        for (Recipes recipe : recipes) {
+            if (recipe.getUser().equals(noteService.getUserByPrincipal(principal))) {
+                result.add(recipe);
+            }
+        }
+
         //Code Image
-        for (Recipes recipe: recipes) {
+        for (Recipes recipe: result) {
             String img = Base64.getEncoder().encodeToString(recipe.getPhoto_recipe());
             recipe.setPhoto(img);
         }
 
-        return recipes;
+
+        return result;
     }
 
     /**
@@ -70,7 +83,7 @@ public class RecipesService {
      * Добавляем запись recipe по id
      * @param new_recipe
      */
-    public void addRecipe(Recipes new_recipe, MultipartFile mainImage) {
+    public void addRecipe(Recipes new_recipe, MultipartFile mainImage, Principal principal) {
 
         //Проверяем загрузили ли фото
         if (mainImage.getSize() != 0) {
@@ -84,6 +97,7 @@ public class RecipesService {
         } else {
             log.info("Dont to add recipe, nope photo");
         }
+        new_recipe.setUser(noteService.getUserByPrincipal(principal));
         recipesRepository.save(new_recipe);
         log.info("Request to add new recipe");
     }
