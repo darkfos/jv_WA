@@ -35,9 +35,16 @@ public class ReviewServices {
         Random rnd_numbers = new Random();
         List<Review> reviews = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            reviews.add(
-                    all_review.get(rnd_numbers.nextInt(all_review.size()))
-            );
+            Review rnd_review = all_review.get(
+                    rnd_numbers.nextInt(all_review.size()));
+
+            if (!reviews.contains(rnd_review)) {
+                reviews.add(
+                        rnd_review
+                );
+            } else {
+                i--;
+            }
         }
 
         return reviews;
