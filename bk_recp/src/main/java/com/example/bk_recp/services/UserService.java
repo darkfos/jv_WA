@@ -6,6 +6,7 @@ import com.example.bk_recp.repositories.UserRepository;
 import com.example.bk_recp.repositories.UserTypeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -17,6 +18,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserTypeRepository userTypeRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public boolean create_user(User new_user) {
 
@@ -26,6 +28,7 @@ public class UserService {
             userRepository.save(new_user);
             UserType usr_tp = userTypeRepository.findById(2L).get();
             new_user.setUserType(usr_tp);
+            new_user.setPassword(passwordEncoder.encode(new_user.getPassword()));
         }
         return true;
     }
