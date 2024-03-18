@@ -29,7 +29,7 @@ public class Note {
     @Column(name="view")
     private int view;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     private User user;
 
     public Note() {

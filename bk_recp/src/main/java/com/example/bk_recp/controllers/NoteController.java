@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.sql.Date;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -25,20 +26,23 @@ public class NoteController {
 
 
     @GetMapping("/note")
-    public String notes(Model model) {
+    public String notes(Model model, Principal principal) {
         model.addAttribute("title_page", "Заметки");
-        model.addAttribute("all_notes", noteService.getNotes());
+        model.addAttribute("all_notes", noteService.getNotes(principal));
+        model.addAttribute("user", noteService.getUserByPrincipal(principal));
         return "notes";
     }
 
     @GetMapping("/create_note")
-    public String create_note(Model model) {
+    public String create_note(Model model, Principal principal) {
+        model.addAttribute("user", noteService.getUserByPrincipal(principal));
         model.addAttribute("title_page", "Создание заметки");
         return "create_note";
     }
 
     @GetMapping("/note_by_id")
-    public String get_note(@RequestParam("id_note") Long id_note, Model model) {
+    public String get_note(@RequestParam("id_note") Long id_note, Model model, Principal principal) {
+        model.addAttribute("user", noteService.getUserByPrincipal(principal));
         Note unique_note = noteService.getNoteById(id_note);
         model.addAttribute("note", unique_note);
         System.out.println(id_note);
@@ -46,19 +50,21 @@ public class NoteController {
     }
 
     @PostMapping("/create_note/create")
-    public String create_new_note(Note new_note) throws ParseException {
+    public String create_new_note(Note new_note, Model model, Principal principal) throws ParseException {
 
         LocalDate localdate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         Date lc_date = Date.valueOf(localdate.format(formatter));
         new_note.setDate_cr(lc_date);
-        noteService.add_note(new_note);
+        model.addAttribute("user", noteService.getUserByPrincipal(principal));
+        noteService.add_note(principal, new_note);
         return "redirect:/";
     }
 
     @PostMapping("/delete_note")
-    public String delete_note(@RequestParam("id_note") Long id_note) {
+    public String delete_note(@RequestParam("id_note") Long id_note, Model model, Principal principal) {
         noteService.del_note(id_note);
+        model.addAttribute("user", noteService.getUserByPrincipal(principal));
         return "redirect:/";
     }
 }

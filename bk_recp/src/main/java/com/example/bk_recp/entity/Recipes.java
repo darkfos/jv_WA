@@ -40,7 +40,7 @@ public class Recipes {
     @Column(name="date_upd")
     private Date date_upd;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     private User user;
 
     private String photo;

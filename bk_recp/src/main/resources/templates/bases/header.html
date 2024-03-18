@@ -17,8 +17,10 @@
                 </li>
             </ul>
         </nav>
-
-        <div class="buttons">
+        <div class="buttons" th:if="${user.login}">
+            <a href="/">Мой профиль</a>
+        </div>
+        <div class="buttons" th:unless="${user.login}">
             <a href="/login">Войти</a>
             <a href="/registration">Регистрация</a>
         </div>

@@ -1,12 +1,15 @@
 package com.example.bk_recp.services;
 
 import com.example.bk_recp.entity.Note;
+import com.example.bk_recp.entity.User;
 import com.example.bk_recp.repositories.NoteRepository;
+import com.example.bk_recp.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,20 +23,59 @@ public class NoteService {
     //Объект модели
     private final NoteRepository notes;
 
-    public List<Note> getNotes() {
+    private final UserRepository userRepository;
+
+
+    /**
+     * Список всех заметок
+     * @return
+     */
+    public List<Note> getNotes(Principal pr) {
         //Получение всех заметок
 
+        User user = getUserByPrincipal(pr);
         ArrayList<Note> all_notes = (ArrayList<Note>) notes.findAll();
+
+        ArrayList<Note> result = new ArrayList<>();
+
+        for (Note note : all_notes) {
+            if (note.getUser().equals(user)) {
+                result.add(note);
+            }
+        }
+
         log.info("Request to all notes");
 
-        return all_notes;
+        return result;
     }
 
-    public void add_note(Note new_note) {
+    /**
+     * Добавление заметки
+     * @param pr
+     * @param new_note
+     */
+    public void add_note(Principal pr, Note new_note) {
         //Добавляем заметку
 
         log.info("Request to save note");
+
+        new_note.setUser(getUserByPrincipal(pr));
         notes.save(new_note);
+    }
+
+
+    /**
+     * Находим юзера по principal
+     * @param pr
+     * @return
+     */
+    public User getUserByPrincipal(Principal pr) {
+        if (pr == null) {
+            return new User();
+        }
+
+        User user = userRepository.findByLogin(pr.getName());
+        return user;
     }
 
     public void del_note(Long id_note) {

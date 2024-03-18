@@ -21,11 +21,6 @@ public class UserController {
 
     @PostMapping("/registration")
     public String createUser(User new_user, Model model) {
-        //if (!userService.create_user(new_user)) {
-        //    model.addAttribute("error_text", "Данный пользователь уже существует!");
-        //    return "registration";
-        //}
-
         if (userService.create_user(new_user) == false) {
             model.addAttribute("error_text", "Данный пользователь уже существует");
             return "registration";

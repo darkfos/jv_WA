@@ -20,6 +20,7 @@
             <label for="textarea">Описание</label>
             <textarea id="textarea" placeholder="Ваше описание" name="description"></textarea>
             <div class="create_button">
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}">
                 <input type="submit" value="Добавить" class="to_submit">
             </div>
         </form>

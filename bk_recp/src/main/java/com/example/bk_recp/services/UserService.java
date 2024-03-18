@@ -30,13 +30,16 @@ public class UserService {
         }
 
         //User is valid?
-        if (new_user.getLogin().length() < 4 || new_user.getPassword().length() < 5 || !new_user.getEmail().isEmpty()) {
+        if (new_user.getLogin().length() < 4 || new_user.getPassword().length() < 5 || new_user.getEmail().isEmpty()) {
             return false;
         }
 
         System.out.println("Данный пользователь ещё не создан");
         UserType us_type = userTypeRepository.getById(0L);
         new_user.setUserType(us_type);
+        new_user.setPassword(
+                passwordEncoder.encode(new_user.getPassword())
+        );
         userRepository.save(new_user);
         return true;
     }

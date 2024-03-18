@@ -33,6 +33,7 @@
                     <label for="photo">Фото</label>
                     <input type="file" id="photo" name="main_file">
                 </div>
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}">
                 <input type="submit" value="Отправить" class="to_submit">
             </form>
         </div>

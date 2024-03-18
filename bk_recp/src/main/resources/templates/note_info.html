@@ -22,10 +22,12 @@
         <div class="note_buttons">
             <form action="/delete_note" method="post">
                 <input type="hidden" name="id_note" th:value="${note.id_notes}">
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}">
                 <input type="submit" value="Удалить" class="bt_del">
             </form>
             <form action="/update_note" method="post">
                 <input type="hidden" name="id_note" th:value="${note.id_notes}">
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}">
                 <input type="submit" value="Обновить" class="bt_upd">
             </form>
         </div>

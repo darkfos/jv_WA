@@ -13,22 +13,25 @@
         <header th:insert="~{bases/header :: header_block}"></header>
         <div class="container mt-45">
             <h2 class="z_header">Мои заметки</h2>
-            <div class="unique_note" th:each="note : ${all_notes}">
-                <div class="left_info_note">
-                    <h2 th:text="${note.title_note}"/>
-                    <p th:text="${note.description}"/>
-                    <p th:text="${note.date_cr}"/>
-                </div>
-                <div class="right_info_note">
-                    <form action="/delete_note" method="post" style="width: 100%">
-                        <input type="hidden" name="id_note" th:value="${note.id_notes}" />
-                        <input type="submit" value="Удалить" class="bt_del">
-                    </form>
-                    <button class="bt_upd">Обновить</button>
-                    <form action="/note_by_id" method="get" style="width: 100%">
-                        <input type="hidden" name="id_note" th:value="${note.id_notes}">
-                        <input type="submit" value="Просмотр" class="bt_info">
-                    </form>
+            <div th:if="${user.login}">
+                <div class="unique_note" th:each="note : ${all_notes}">
+                    <div class="left_info_note">
+                        <h2 th:text="${note.title_note}"/>
+                        <p th:text="${note.description}"/>
+                        <p th:text="${note.date_cr}"/>
+                    </div>
+                    <div class="right_info_note">
+                        <form action="/delete_note" method="post" style="width: 100%">
+                            <input type="hidden" name="id_note" th:value="${note.id_notes}" />
+                            <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+                            <input type="submit" value="Удалить" class="bt_del">
+                        </form>
+                        <button class="bt_upd">Обновить</button>
+                        <form action="/note_by_id" method="get" style="width: 100%">
+                            <input type="hidden" name="id_note" th:value="${note.id_notes}">
+                            <input type="submit" value="Просмотр" class="bt_info">
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="button_add">

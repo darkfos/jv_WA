@@ -28,13 +28,13 @@ public class User implements UserDetails {
     @Column(name="email")
     private String email;
 
-    @ManyToOne(cascade = CascadeType.ALL) //Каскадное обновление, EAGER - подгружение связанных сущностей
+    @ManyToOne(cascade = CascadeType.REFRESH) //Каскадное обновление, EAGER - подгружение связанных сущностей
     private UserType userType;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REFRESH)
     private List<Note> notes;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REFRESH)
     private List<Recipes> recipes;
 
     @OneToMany(mappedBy = "user")
