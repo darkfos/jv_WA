@@ -12,7 +12,7 @@
 <body>
 <header th:insert="~{bases/header :: header_block}"></header>
 <div class="container mt-45">
-    <h2 class="z_header">Мои заметки</h2>
+    <h2 class="z_header">Наши отзывы</h2>
     <div class="unique_note" th:each="review : ${reviews}">
         <div class="left_info_note">
             <h2 th:text="${review.name_user}"/>

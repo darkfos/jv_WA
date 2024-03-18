@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -16,7 +17,7 @@ import java.util.Random;
 public class ReviewServices {
 
     private final ReviewRepository reviewRepository;
-
+    private final NoteService noteService;
 
     /**
      * Получаем все отзывы
@@ -83,7 +84,19 @@ public class ReviewServices {
      * Добавление review
      * @param review
      */
-    public void add_review(Review review) {
+    public boolean add_review(Review review, Principal principal) {
+        review.setUser(
+                noteService.getUserByPrincipal(principal)
+        );
+
+        //Created more 1 review
+        ArrayList<Review> all_review = (ArrayList<Review>) reviewRepository.findAll();
+        for (Review rev : all_review) {
+            if (rev.getUser().equals(noteService.getUserByPrincipal(principal))) {
+                return false;
+            }
+        }
         reviewRepository.save(review);
+        return true;
     }
 }
