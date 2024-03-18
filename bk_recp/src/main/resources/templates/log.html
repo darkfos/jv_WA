@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../../../../tst/create_note/create_note_main.css">
+    <link rel="stylesheet" th:href="@{create_note/create_note_main.css}">
 </head>
 <body>
     <div class="create_note">
-        <img src="../../../../../tst/create_note/image%206.png" width="329" height="280">
+        <img th:src="@{/create_note/image 6.png}" width="329" height="280">
         <h1>Вход</h1>
         <div class="information">
             <label for="text_title">Логин</label>
