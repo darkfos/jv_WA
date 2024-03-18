@@ -21,15 +21,23 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public boolean create_user(User new_user) {
+        System.out.println(new_user.getLogin());
 
-        if (userRepository.findByLogin(new_user.getLogin()).isEnabled() || !new_user.getEmail().isEmpty()) {
+        //Created User?
+        if (userRepository.findByLogin(new_user.getLogin()) != null) {
+            System.out.println("Данный пользователь уже существует");
             return false;
-        } else {
-            userRepository.save(new_user);
-            UserType usr_tp = userTypeRepository.findById(2L).get();
-            new_user.setUserType(usr_tp);
-            new_user.setPassword(passwordEncoder.encode(new_user.getPassword()));
         }
+
+        //User is valid?
+        if (new_user.getLogin().length() < 4 || new_user.getPassword().length() < 5 || !new_user.getEmail().isEmpty()) {
+            return false;
+        }
+
+        System.out.println("Данный пользователь ещё не создан");
+        UserType us_type = userTypeRepository.getById(0L);
+        new_user.setUserType(us_type);
+        userRepository.save(new_user);
         return true;
     }
 }

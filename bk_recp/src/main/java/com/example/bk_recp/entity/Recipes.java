@@ -1,7 +1,7 @@
 package com.example.bk_recp.entity;
 
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -40,7 +40,7 @@ public class Recipes {
     @Column(name="date_upd")
     private Date date_upd;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
     private String photo;

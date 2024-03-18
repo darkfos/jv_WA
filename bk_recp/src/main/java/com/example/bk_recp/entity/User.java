@@ -1,6 +1,6 @@
 package com.example.bk_recp.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,18 +23,18 @@ public class User implements UserDetails {
     private String login;
 
     @Column(name="password")
-    private int password;
+    private String password;
 
     @Column(name="email")
     private String email;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER) //Каскадное обновление, EAGER - подгружение связанных сущностей
+    @ManyToOne(cascade = CascadeType.ALL) //Каскадное обновление, EAGER - подгружение связанных сущностей
     private UserType userType;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Note> notes;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Recipes> recipes;
 
     @OneToMany(mappedBy = "user")
@@ -47,6 +47,12 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
+    }
+
+
+    @Override
+    public String getPassword() {
+        return this.password;
     }
 
     @Override
@@ -74,5 +80,11 @@ public class User implements UserDetails {
         //Тип активности
 
         return true;
+    }
+
+    public String info() {
+        return "" + getLogin() +
+                ", " + getPassword() + ", " +
+                getEmail() + ", " + getUserType();
     }
 }

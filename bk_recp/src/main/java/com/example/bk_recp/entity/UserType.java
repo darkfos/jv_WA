@@ -1,11 +1,10 @@
 package com.example.bk_recp.entity;
 
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -25,7 +24,7 @@ public class UserType {
     private int code_type;
 
 
-    @OneToMany(mappedBy = "userType", cascade = CascadeType.ALL, fetch = FetchType.EAGER) //Каскадное обновление, EAGER - подгружение связанных сущностей
+    @OneToMany(mappedBy = "userType", cascade = CascadeType.ALL) //Каскадное обновление, EAGER - подгружение связанных сущностей
     private List<User> users;
 
     public UserType() {

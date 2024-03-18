@@ -1,7 +1,7 @@
 package com.example.bk_recp.entity;
 
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -29,7 +29,7 @@ public class Note {
     @Column(name="view")
     private int view;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
     public Note() {

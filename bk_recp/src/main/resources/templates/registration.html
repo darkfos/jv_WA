@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" th:href="@{/styles/create_note_main.css">
+    <link rel="stylesheet" th:href="@{/styles/create_note_main.css}">
     <link rel="stylesheet" th:href="@{/styles/for_header.css}">
     <link rel="stylesheet" th:href="@{/styles/for_footer.css}">
 </head>
@@ -12,21 +12,23 @@
     <div class="create_note">
         <img th:src="@{/images/image 5.png}" width="329" height="280">
         <h1>Регистрация</h1>
-        <div class="information">
+        <form action="/registration" method="post" class="information">
             <label for="text_title">Логин</label>
-            <input type="text" placeholder="Ваш заголовок" id="text_title">
+            <input type="text" placeholder="Ваш заголовок" id="text_title" name="login">
             <label for="password">Пароль</label>
-            <input id="password" placeholder="Ваше описание"></textarea>
+            <input id="password" placeholder="Ваше описание" name="password"></textarea>
             <label for="email_text">Почта</label>
-            <input type="email" id="email_text">
-            <label for="telephone_number">Номер телефона</label>
-            <input type="tel" id="telephone_number">
-        </div>
-        <div class="create_button">
-            <form action="/authorization_join" method="post" class="form_add_review">
-                <input type="submit" value="Отправить">
-            </form>
-        </div>
+            <input type="email" id="email_text" name="email">
+            <div class="create_button">
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+                <input type="submit" value="Зарегистрироваться" class="to_submit">
+            </div>
+        </form>
     </div>
+
+    <!--Error message-->
+    <p th:if="${error_text}">
+        <span th:text="${error_text}"/>
+    </p>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package configurations;
+package com.example.bk_recp.configurations;
 
 import com.example.bk_recp.services.CUDService;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 
 import javax.naming.AuthenticationException;
 import java.net.http.HttpResponse;
@@ -25,7 +24,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
+        http
+                .authorizeRequests()
+                .antMatchers("/",
+                        "/registration", "/login", "/styles/**", "/images/**")
+                .permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll();
     }
 
     @Override
@@ -36,6 +47,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new SCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(8);
     }
 }

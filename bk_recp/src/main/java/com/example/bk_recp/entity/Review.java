@@ -1,6 +1,6 @@
 package com.example.bk_recp.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

@@ -3,22 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" th:href="@{create_note/create_note_main.css}">
+    <title>Авторизация</title>
+    <link rel="stylesheet" th:href="@{/styles/create_note_main.css}">
+    <link rel="stylesheet" th:href="@{/styles/create_note_main.css}">
 </head>
 <body>
-    <div class="create_note">
-        <img th:src="@{/create_note/image 6.png}" width="329" height="280">
-        <h1>Вход</h1>
-        <div class="information">
-            <label for="text_title">Логин</label>
-            <input type="text" placeholder="Ваш заголовок" id="text_title">
-            <label for="password">Пароль</label>
-            <input id="password" placeholder="Ваше описание"></textarea>
+<div class="create_note">
+    <img th:src="@{/images/image 5.png}" width="329" height="280">
+    <h1>Вход</h1>
+    <form action="/login" method="post" class="information">
+        <label for="text_title">Логин</label>
+        <input type="text" placeholder="Ваш логин" id="text_title" name="username">
+        <label for="password">Пароль</label>
+        <input type="password" id="password" placeholder="Ваш пароль" name="password">
+        <div class="create_button">
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+            <input type="submit" value="Войти" class="to_submit">
         </div>
         <div class="create_button">
-            <button>Отправить</button>
+            <a href="/registration" class="to_submit">Регистрация</a>
         </div>
-    </div>
+    </form>
+</div>
 </body>
 </html>
