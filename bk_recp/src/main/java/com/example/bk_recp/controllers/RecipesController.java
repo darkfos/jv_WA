@@ -145,9 +145,10 @@ public class RecipesController {
 
 
     @GetMapping("/get_recommend")
-    public String recommend_page(Model model) {
+    public String recommend_page(Model model, Principal principal) {
 
         model.addAttribute("recipes", recipesService.get_recipes_random());
-        return "recommends";
+        model.addAttribute("user", noteService.getUserByPrincipal(principal));
+        return "recomends";
     }
 }
