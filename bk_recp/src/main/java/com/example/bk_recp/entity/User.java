@@ -41,10 +41,10 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REFRESH)
     private List<Note> notes;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REFRESH)
+    @OneToMany(mappedBy = "user")
     private List<Recipes> recipes;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user")
     private List<Review> review;
 
     public User() {
