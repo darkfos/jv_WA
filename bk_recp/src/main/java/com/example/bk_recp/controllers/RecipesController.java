@@ -111,4 +111,35 @@ public class RecipesController {
         model.addAttribute("user", principal);
         return "redirect:/";
     }
+
+
+    @GetMapping("/update_recipe")
+    public String update_recip_by_id(@RequestParam("id_recipe") Long id_recipe, Model model, Principal principal) {
+        Recipes recipes = recipesService.getRecipeById(id_recipe);
+        model.addAttribute("user", noteService.getUserByPrincipal(principal));
+        model.addAttribute("recipe", recipes);
+        return "update_recipe";
+    }
+
+    /**
+     * Update recipe
+     * @param id_recipe
+     * @param title_recipe
+     * @param description
+     * @param compound
+     * @param model
+     * @param principal
+     * @return
+     */
+    @PostMapping("/update_recipe")
+    public String update_recipe_by_id(@RequestParam("id_recipe") Long id_recipe,
+                                      @RequestParam("title_recipe") String title_recipe,
+                                      @RequestParam("description") String description,
+                                      @RequestParam("compound") String compound,
+                                      Model model, Principal principal) {
+
+        recipesService.update_recipe(id_recipe, title_recipe, description, compound);
+        model.addAttribute("user", noteService.getUserByPrincipal(principal));
+        return "redirect:/recipes";
+    }
 }

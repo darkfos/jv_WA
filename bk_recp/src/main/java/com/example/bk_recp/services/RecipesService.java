@@ -9,6 +9,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -83,8 +86,7 @@ public class RecipesService {
      * Добавляем запись recipe по id
      * @param new_recipe
      */
-    public void addRecipe(Recipes new_recipe, MultipartFile mainImage, Principal principal) {
-
+    public boolean addRecipe(Recipes new_recipe, MultipartFile mainImage, Principal principal) {
         //Проверяем загрузили ли фото
         if (mainImage.getSize() != 0) {
             try {
@@ -96,9 +98,40 @@ public class RecipesService {
             }
         } else {
             log.info("Dont to add recipe, nope photo");
+            return false;
         }
         new_recipe.setUser(noteService.getUserByPrincipal(principal));
         recipesRepository.save(new_recipe);
         log.info("Request to add new recipe");
+        return true;
+    }
+
+    /**
+     * Обновление рецепта
+     * @param id_recipe
+     * @param title_recipe
+     * @param description
+     * @param compound
+     * @return
+     */
+    public boolean update_recipe(Long id_recipe,
+                                 String title_recipe, String description,
+                                 String compound) {
+        Recipes recipes = recipesRepository.findById(id_recipe).orElse(null);
+
+        if (recipes != null) {
+            recipes.setTitle_recipe(title_recipe);
+            recipes.setDescription(description);
+            recipes.setCompound(compound);
+
+            //Date
+            LocalDate localdate = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            Date lc_date = Date.valueOf(localdate.format(formatter));
+
+            recipes.setDate_upd(lc_date);
+            recipesRepository.save(recipes);
+            return true;
+        } else { return false; }
     }
 }

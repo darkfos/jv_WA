@@ -26,8 +26,8 @@
                 <input type="hidden" name="_csrf" th:value="${_csrf.token}">
                 <input type="submit" value="Удалить" class="bt_del">
             </form>
-            <form action="/note_by_id" method="get" style="width: 100%">
-                <input type="hidden" name="id_note" th:value="${recipe.id_recipe}">
+            <form action="/update_recipe" method="get" style="width: 100%">
+                <input type="hidden" name="id_recipe" th:value="${recipe.id_recipe}">
                 <input type="hidden" name="_csrf" th:value="${_csrf.token}">
                 <input type="submit" value="Обновить" class="bt_upd">
             </form>

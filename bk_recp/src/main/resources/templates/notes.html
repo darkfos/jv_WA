@@ -14,7 +14,7 @@
         <div class="container mt-45">
             <h2 class="z_header">Мои заметки</h2>
             <div th:if="${user.login}">
-                <div class="unique_note" th:each="note : ${all_notes}">
+                <div class="unique_note" th:each="note : ${all_notes}" style="width: 80%;">
                     <div class="left_info_note">
                         <h2 th:text="${note.title_note}"/>
                         <p th:text="${note.description}"/>

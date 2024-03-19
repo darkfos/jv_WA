@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="title_page"/>
+    <link rel="stylesheet" th:href="@{/styles/for_footer.css}">
+    <link rel="stylesheet" th:href="@{/styles/for_header.css}">
+    <link rel="stylesheet" th:href="@{/styles/create_note_main.css}">
+</head>
+<body>
+<header th:insert="bases/header :: header_block"></header>
+<div class="create_note">
+    <img th:src="@{/images/image 6.png}" width="329" height="280">
+    <h1>Обновляем рецепт</h1>
+    <form action="/update_recipe" method="post" class="information" enctype="multipart/form-data">
+        <label for="title_recipe">Заголовок</label>
+        <input type="text" th:value="${recipe.title_recipe}" id="title_recipe" name="title_recipe">
+        <label for="description">Описание</label>
+        <textarea id="description" name="description" th:text="${recipe.description}"></textarea>
+        <label for="compound">Описание готовки</label>
+        <textarea id="compound" name="compound" th:text="${recipe.compound}"></textarea>
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+        <input type="hidden" name="id_recipe" th:value="${recipe.id_recipe}">
+        <input type="submit" value="Обновить" class="to_submit">
+    </form>
+</div>
+<footer th:insert="bases/footer :: footer_block"></footer>
+</body>
+</html>
