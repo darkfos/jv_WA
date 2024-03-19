@@ -10,7 +10,7 @@
                     <a href="/note">Заметки</a>
                 </li>
                 <li>
-                    <a href="#">Рекомендации</a>
+                    <a href="/get_recommend">Рекомендации</a>
                 </li>
                 <li>
                     <a href="/reviews">Отзывы</a>
@@ -21,7 +21,7 @@
             <a href="/my-profile">Мой профиль</a>
             <form action="/logout" method="post">
                 <input type="hidden" name="_csrf" th:value="${_csrf.token}">
-                <input type="submit" value="Выйти">
+                <input type="submit" value="Выйти" style="background-color: #FCC5C5; border: 1.5px solid black; width: 60px; height: 40px; border-radius: 20px">
             </form>
         </div>
         <div class="buttons" th:unless="${user.login}">

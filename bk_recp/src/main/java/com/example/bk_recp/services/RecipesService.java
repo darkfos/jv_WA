@@ -1,6 +1,7 @@
 package com.example.bk_recp.services;
 
 import com.example.bk_recp.entity.Recipes;
+import com.example.bk_recp.entity.User;
 import com.example.bk_recp.repositories.RecipesRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -53,6 +55,39 @@ public class RecipesService {
     }
 
     /**
+     * Возвращаем все записи рецептов
+     * @return
+     */
+    public List<Recipes> get_recipes_random() {
+
+        List<Recipes> recipes = recipesRepository.findAll();
+        log.info("Request get all recipes");
+
+        //Get recipe for user
+        ArrayList<Recipes> result = new ArrayList<>();
+
+        Random rnd = new Random();
+
+        int rec = rnd.nextInt(recipes.size());
+        for (int i = 0; i < rec; i++) {
+            result.add(
+                    recipes.get(
+                            rnd.nextInt(recipes.size())
+                    )
+            );
+        }
+
+        //Code Image
+        for (Recipes recipe: result) {
+            String img = Base64.getEncoder().encodeToString(recipe.getPhoto_recipe());
+            recipe.setPhoto(img);
+        }
+
+
+        return result;
+    }
+
+    /**
      * Возвращаем запись recipe по id
      * @param id_recipe
      * @return
@@ -75,10 +110,14 @@ public class RecipesService {
      * Удаляем запись recipe по id
      * @param id_recipe
      */
-    public void delRecipeById(Long id_recipe) {
+    public void delRecipeById(Long id_recipe, User user) {
 
-        recipesRepository.deleteById(id_recipe);
-        log.info("Request to del recipe");
+        Recipes recipes_to_del = recipesRepository.findById(id_recipe).orElse(null);
+
+        if (recipes_to_del.getUser().equals(user)) {
+            recipesRepository.deleteById(id_recipe);
+            log.info("Request to del recipe");
+        }
     }
 
 
@@ -116,10 +155,10 @@ public class RecipesService {
      */
     public boolean update_recipe(Long id_recipe,
                                  String title_recipe, String description,
-                                 String compound) {
+                                 String compound, User user) {
         Recipes recipes = recipesRepository.findById(id_recipe).orElse(null);
 
-        if (recipes != null) {
+        if (recipes != null && recipes.getUser().equals(user)) {
             recipes.setTitle_recipe(title_recipe);
             recipes.setDescription(description);
             recipes.setCompound(compound);

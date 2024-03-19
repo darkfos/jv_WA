@@ -107,7 +107,7 @@ public class RecipesController {
      */
     @PostMapping("/delete_recipe")
     public String delete_recipe_by_id(@RequestParam("id_recipe") Long id_recipe, Model model, Principal principal) {
-        recipesService.delRecipeById(id_recipe);
+        recipesService.delRecipeById(id_recipe, noteService.getUserByPrincipal(principal));
         model.addAttribute("user", principal);
         return "redirect:/";
     }
@@ -138,8 +138,16 @@ public class RecipesController {
                                       @RequestParam("compound") String compound,
                                       Model model, Principal principal) {
 
-        recipesService.update_recipe(id_recipe, title_recipe, description, compound);
+        recipesService.update_recipe(id_recipe, title_recipe, description, compound, noteService.getUserByPrincipal(principal));
         model.addAttribute("user", noteService.getUserByPrincipal(principal));
         return "redirect:/recipes";
+    }
+
+
+    @GetMapping("/get_recommend")
+    public String recommend_page(Model model) {
+
+        model.addAttribute("recipes", recipesService.get_recipes_random());
+        return "recommends";
     }
 }
