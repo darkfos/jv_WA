@@ -14,11 +14,11 @@
         <div class="container mt-45">
             <h2 class="z_header">Мои заметки</h2>
             <div th:if="${user.login}">
-                <div class="unique_note" th:each="note : ${all_notes}" style="width: 80%;">
-                    <div class="left_info_note">
-                        <h2 th:text="${note.title_note}"/>
-                        <p th:text="${note.description}"/>
-                        <p th:text="${note.date_cr}"/>
+                <div class="unique_note" th:each="note : ${all_notes}" style="width: 80%; text-align: left; padding-bottom: 20px;">
+                    <div class="left_info_note" style="width: 70%; text-align: left;">
+                        <h2 th:text="${note.title_note}" style="width: 50%; text-align: left;"/>
+                        <p th:text="${note.description}" style="width: 50%; text-align: left;"/>
+                        <p th:text="${note.date_cr}" style="width: 50%; text-align: left;"/>
                     </div>
                     <div class="right_info_note">
                         <form action="/delete_note" method="post" style="width: 100%">
@@ -37,6 +37,7 @@
                             <input type="submit" value="Просмотр" class="bt_info">
                         </form>
                     </div>
+                    <br><br>
                 </div>
             </div>
             <div class="button_add">

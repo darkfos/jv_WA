@@ -14,9 +14,9 @@
 <div class="container mt-45">
     <h2 class="z_header">Наши отзывы</h2>
     <div class="unique_note" th:each="review : ${reviews}">
-        <div class="left_info_note">
-            <h2 th:text="${review.name_user}"/>
-            <p th:text="${review.message_user}"/>
+        <div class="left_info_note" style="width: 70%; text-align: left;">
+            <h2 th:text="${review.name_user}" style="width: 70%; text-align: left;"/>
+            <p th:text="${review.message_user}" style="width: 60%; text-align: left;"/>
         </div>
     </div>
     <div class="button_add">

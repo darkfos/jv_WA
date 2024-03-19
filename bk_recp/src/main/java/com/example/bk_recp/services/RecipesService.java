@@ -68,23 +68,28 @@ public class RecipesService {
 
         Random rnd = new Random();
 
-        int rec = rnd.nextInt(recipes.size());
-        for (int i = 0; i < rec; i++) {
-            result.add(
-                    recipes.get(
-                            rnd.nextInt(recipes.size())
-                    )
-            );
+        if (recipes.size() > 0) {
+            int rec = rnd.nextInt(recipes.size());
+
+            for (int i = 0; i < rec; i++) {
+                result.add(
+                        recipes.get(
+                                rnd.nextInt(recipes.size())
+                        )
+                );
+            }
+
+            //Code Image
+            for (Recipes recipe : result) {
+                String img = Base64.getEncoder().encodeToString(recipe.getPhoto_recipe());
+                recipe.setPhoto(img);
+            }
+
+
+            return result;
         }
 
-        //Code Image
-        for (Recipes recipe: result) {
-            String img = Base64.getEncoder().encodeToString(recipe.getPhoto_recipe());
-            recipe.setPhoto(img);
-        }
-
-
-        return result;
+        return recipes;
     }
 
     /**

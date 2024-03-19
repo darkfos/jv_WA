@@ -14,11 +14,15 @@
 <div class="container mt-45">
     <h2 class="z_header">Мои рецепты</h2>
     <div class="unique_recipe" th:each="recipe : ${recipes}">
-        <img th:src="'data:image/jpeg;base64,' + ${recipe.photo}" width="300" height="250" style="border: 1ps solid white; padding-left:5%; border-radius: 20px;">
-        <div class="left_info_recipe">
-            <h2 th:text="${recipe.title_recipe}"/>
-            <p th:text="${recipe.description}"/>
-            <p th:text="${recipe.date_reg}"/>
+        <div class="left_info_recipe" style="width: 70%; text-align: left;">
+            <div class="img">
+                <img th:src="'data:image/jpeg;base64,' + ${recipe.photo}" width="300" height="250" style="border: 1ps solid white; border-radius: 20px; margin-left: -10%">
+            </div>
+            <div class="cnt">
+                <h2 th:text="${recipe.title_recipe}" style="width: 30%; text-align: left;"/>
+                <p th:text="${recipe.description}" style="width: 25%; margin-left: 2%;"/>
+                <p th:text="${recipe.date_reg}" style="width: 35%; margin-left: 2%;"/>
+            </div>
         </div>
         <div class="right_info_recipe">
             <form action="/delete_recipe" method="post" style="width: 100%">
@@ -26,7 +30,7 @@
                 <input type="hidden" name="_csrf" th:value="${_csrf.token}">
                 <input type="submit" value="Удалить" class="bt_del">
             </form>
-            <form action="/update_recipe" method="get" style="width: 100%">
+            <form action="/update_recipe" method="get" style="width: 100%; padding-bottom: 20px;">
                 <input type="hidden" name="id_recipe" th:value="${recipe.id_recipe}">
                 <input type="hidden" name="_csrf" th:value="${_csrf.token}">
                 <input type="submit" value="Обновить" class="bt_upd">
@@ -37,6 +41,8 @@
                 <input type="submit" value="Просмотр" class="bt_info">
             </form>
         </div>
+        <br><br>
+        <br><br>
     </div>
     <div class="button_add">
         <button class="bt_add">

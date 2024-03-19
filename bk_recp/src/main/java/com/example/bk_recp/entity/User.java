@@ -38,7 +38,7 @@ public class User implements UserDetails {
     @ManyToOne(cascade = CascadeType.REFRESH) //Каскадное обновление, EAGER - подгружение связанных сущностей
     private UserType userType;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REFRESH)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Note> notes;
 
     @OneToMany(mappedBy = "user")

@@ -1,6 +1,6 @@
 .unique_note {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin: auto;
     width: auto;
     border: 2px solid black;
@@ -80,7 +80,7 @@
 
 .unique_recipe {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin: auto;
     width: auto;
     border: 2px solid black;
@@ -91,7 +91,7 @@
 
 .left_info_recipe {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     text-align: left;
     justify-content: left;
