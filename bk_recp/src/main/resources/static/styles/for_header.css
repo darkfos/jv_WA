@@ -65,11 +65,11 @@ button {
 }
 
 
-button:focus {
+button:focus, input:focus {
     border-color: #61afaf;
 }
 
-button:hover {
+button:hover, input:hover {
     border-color: #61afaf;
     color: rgb(255, 255, 255);
 }

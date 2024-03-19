@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой профиль</title>
+    <link rel="stylesheet" th:href="@{/styles/for_footer.css}">
+    <link rel="stylesheet" th:href="@{/styles/for_header.css}">
+    <link rel="stylesheet" th:href="@{/styles/my_profile.css}">
+</head>
+<body>
+    <header th:insert="~{bases/header :: header_block}"/>
+    <main>
+        <div class="my-profile">
+            <div class="left-block">
+                <img th:src="@{/images/image 4.png}" width="90%" height="90%">
+            </div>
+            <div class="right-block">
+                <header>
+                    <h1>Мой профиль</h1>
+                    <br>
+                    <p>Моё имя: <span th:text="${user.name_user}"/></p>
+                    <br>
+                    <p>Количество заметок: <span th:text="${size_recipes}"/></p>
+                    <br>
+                    <p>Количество рецептов: <span th:text="${size_notes}"/></p>
+                    <br>
+                    <p>Дата регистрации: <span th:text="${user.date_reg}"/></p>
+                </header>
+                <br><br>
+                <div class="footer-profile">
+                    <h2>Мои настройки</h2>
+                    <br><br>
+                    <label for="name_us">Мое новое имя</label><br><br>
+                    <div class="btn-profile">
+                        <form action="/update_profile" method="post">
+                            <input type="text" id="name_us" class="new_name" placeholder="Ваше имя" name="new_name">
+                            <input type="hidden" name="id_user" th:value="${user.id_user}">
+                            <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+                            <input type="submit" value="Обновить" class="btn-upd_prof">
+                        </form>
+                        <form action="/delete_profile" method="post">
+                            <input type="hidden" name="id_user" th:value="${user.id_user}">
+                            <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+                            <input type="submit" value="Удалить профиль" class="btn-del_prof">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <br><br><br>
+    <footer th:insert="~{bases/footer :: footer_block}"/>
+</div>
+</body>
+</html>

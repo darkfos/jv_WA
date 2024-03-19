@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -27,6 +28,12 @@ public class User implements UserDetails {
 
     @Column(name="email")
     private String email;
+
+    @Column(name="name_user")
+    private String name_user;
+
+    @Column(name="date_reg")
+    private Date date_reg;
 
     @ManyToOne(cascade = CascadeType.REFRESH) //Каскадное обновление, EAGER - подгружение связанных сущностей
     private UserType userType;

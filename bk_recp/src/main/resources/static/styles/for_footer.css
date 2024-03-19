@@ -8,14 +8,20 @@
     background: #ffb7b7;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 
 footer{
-    height: 100%;
-    margin-top: 10%;
+    height: auto;
     background-color: #B6AEAE;
-    left: 0;
-    right: 0;
     position: relative;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    top: 100%;
 }
 
 .footer {

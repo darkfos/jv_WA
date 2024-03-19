@@ -1,0 +1,56 @@
+.my-profile {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    text-align: center;
+    width: 70%;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-block {
+    width: 60%;
+}
+
+
+.right-block {
+    width: 40%;
+    text-align: left;
+}
+
+.btn-profile {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5%;
+    gap: 20px;
+    width: 100%;
+}
+
+.btn-profile > form > input {
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 150px;
+    height: 30px;
+}
+
+
+.btn-upd_prof {
+    background-color: #AACBCB;
+}
+
+.btn-del_prof {
+    background-color: #B6AEAE;
+}
+
+.btn-profile > form > input:hover {
+    border-color: #AACBCB;
+    color: black;
+}
+
+.new_name {
+    background-color: #FCC5C5;
+    height: 25px;
+    border: 1px solid white;
+    border-radius: 5px;
+    width: 60%;
+}
