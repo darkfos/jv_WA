@@ -17,6 +17,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -50,8 +51,15 @@ public class UserService {
         }
 
         System.out.println("Данный пользователь ещё не создан");
-        UserType us_type = userTypeRepository.getById(0L);
-        new_user.setUserType(us_type);
+        List<UserType> us_type = userTypeRepository.findAll();
+
+        Long id = 0L;
+        for (UserType usr : us_type) {
+            if (usr.getName_type().equals("user")) {
+                id = usr.getId_user_type();
+            }
+        }
+        new_user.setUserType(userTypeRepository.getById(id));
         new_user.setPassword(
                 passwordEncoder.encode(new_user.getPassword())
         );

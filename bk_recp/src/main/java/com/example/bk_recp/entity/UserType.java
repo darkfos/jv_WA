@@ -28,6 +28,5 @@ public class UserType {
     private List<User> users;
 
     public UserType() {
-
     }
 }
