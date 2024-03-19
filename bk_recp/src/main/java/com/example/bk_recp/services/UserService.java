@@ -126,4 +126,12 @@ public class UserService {
 
         return result.size();
     }
+
+    /**
+     * Удаление пользователя по id
+     * @param user_id
+     */
+    public void del_user(Long user_id) {
+        userRepository.deleteById(user_id);
+    }
 }
