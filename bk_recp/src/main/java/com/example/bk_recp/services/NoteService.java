@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -99,5 +101,24 @@ public class NoteService {
         else {
             return null;
         }
+    }
+
+    /**
+     * Обновление note
+     * @param id_note
+     * @param title_note
+     * @param description
+     */
+    public void update_note(Long id_note, String title_note, String description) {
+        Note note = notes.findById(id_note).orElse(null);
+        note.setTitle_note(title_note);
+        note.setDescription(description);
+
+        //Date
+        LocalDate localdate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        Date lc_date = Date.valueOf(localdate.format(formatter));
+        note.setDate_upd(lc_date);
+        notes.save(note);
     }
 }

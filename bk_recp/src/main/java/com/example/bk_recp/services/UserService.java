@@ -62,6 +62,7 @@ public class UserService {
         Date lc_date = Date.valueOf(localdate.format(formatter));
 
         new_user.setDate_reg(lc_date);
+        new_user.setName_user(new_user.getLogin());
         userRepository.save(new_user);
         return true;
     }

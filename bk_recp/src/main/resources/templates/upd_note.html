@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="title_page"/>
+    <link rel="stylesheet" th:href="@{/styles/for_footer.css}">
+    <link rel="stylesheet" th:href="@{/styles/for_header.css}">
+    <link rel="stylesheet" th:href="@{/styles/create_note_main.css}">
+</head>
+<body>
+<header th:insert="~{bases/header :: header_block}"></header>
+<div class="create_note">
+    <img th:src="@{/images/image 7.png}" width="329" height="280">
+    <h1>Обновляем вашу заметку</h1>
+    <form action="/update_note" method="post" class="information">
+        <label for="text_title">Заголовок</label>
+        <input type="text" th:value="${note.title_note}" id="text_title" name="title_note">
+        <label for="textarea">Описание</label>
+        <textarea id="textarea" name="description_text" th:text="${note.description}">
+        </textarea>
+        <div class="create_button">
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+            <input type="hidden" name="id_note" th:value="${note.id_notes}">
+            <input type="submit" value="Обновить" class="to_submit">
+        </div>
+    </form>
+</div>
+<footer th:insert="~{bases/footer :: footer_block}"></footer>
+</body>
+</html>

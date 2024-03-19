@@ -78,6 +78,6 @@ public class MainController {
     public String del_profile(@RequestParam("id_user") Long id_user, Model model, Principal principal) {
         userService.del_user(id_user);
         model.addAttribute("user", noteService.getUserByPrincipal(principal));
-        return "/logout";
+        return "redirect:/login?logout";
     }
 }

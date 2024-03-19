@@ -56,6 +56,7 @@ public class NoteController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         Date lc_date = Date.valueOf(localdate.format(formatter));
         new_note.setDate_cr(lc_date);
+        new_note.setDate_upd(lc_date);
         model.addAttribute("user", noteService.getUserByPrincipal(principal));
         noteService.add_note(principal, new_note);
         return "redirect:/";
@@ -65,6 +66,21 @@ public class NoteController {
     public String delete_note(@RequestParam("id_note") Long id_note, Model model, Principal principal) {
         noteService.del_note(id_note);
         model.addAttribute("user", noteService.getUserByPrincipal(principal));
+        return "redirect:/";
+    }
+
+
+    @GetMapping("/update_note")
+    public String update_recipe_page(@RequestParam("id_note") Long id_note, Model model, Principal principal) {
+        model.addAttribute("user", noteService.getUserByPrincipal(principal));
+        model.addAttribute("note", noteService.getNoteById(id_note));
+        return "upd_note";
+    }
+
+    @PostMapping("/update_note")
+    public String update_note(@RequestParam("title_note") String title_note, @RequestParam("description_text") String description,
+                              @RequestParam("id_note") Long id_note, Model model, Principal principal) {
+        noteService.update_note(id_note, title_note, description);
         return "redirect:/";
     }
 }

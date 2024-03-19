@@ -26,9 +26,14 @@
                             <input type="hidden" name="_csrf" th:value="${_csrf.token}">
                             <input type="submit" value="Удалить" class="bt_del">
                         </form>
-                        <button class="bt_upd">Обновить</button>
+                        <form action="/update_note" method="get" class="bt_upd" style="width: 100%">
+                            <input type="hidden" name="id_note" th:value="${note.id_notes}">
+                            <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+                            <input type="submit" value="Обновить" class="bt_upd">
+                        </form>
                         <form action="/note_by_id" method="get" style="width: 100%">
                             <input type="hidden" name="id_note" th:value="${note.id_notes}">
+                            <input type="hidden" name="_csrf" th:value="${_csrf.token}">
                             <input type="submit" value="Просмотр" class="bt_info">
                         </form>
                     </div>

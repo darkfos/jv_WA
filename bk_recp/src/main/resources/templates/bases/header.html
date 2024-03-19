@@ -21,7 +21,7 @@
             <a href="/my-profile">Мой профиль</a>
             <form action="/logout" method="post">
                 <input type="hidden" name="_csrf" th:value="${_csrf.token}">
-                <input type="submit" value="Выйти" style="background-color: #FCC5C5; border: 1.5px solid black; width: 60px; height: 40px; border-radius: 20px">
+                <input type="submit" value="Выйти">
             </form>
         </div>
         <div class="buttons" th:unless="${user.login}">

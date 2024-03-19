@@ -26,6 +26,9 @@ public class Note {
     @Column(name="date_cr")
     private Date date_cr;
 
+    @Column(name="date_upd")
+    private Date date_upd;
+
     @Column(name="view")
     private int view;
 
